@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">RecipeAndroid</string>
+    <string name="title">Recetas</string>
+    <string name="Name">Dime tu nombre</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="radio_button_dish">Platos</string>
+    <string name="radio_button_dessert">Postres</string>
+    <string name="number_of_persons">Numero de personas</string>
+    <string name="validate">Validar</string>
+    <!-- Errors -->
+    <string name="empty_field">Campo obligatorio</string>
+    <string name="numeric_field">Campo numerico</string>
+    <string name="between_1_and_10">Numero entre 1 y 10</string>
+</resources>
