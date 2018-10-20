@@ -3,6 +3,7 @@ package com.example.adrian.recipeandroid;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +13,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     Button botonOk;
@@ -29,7 +32,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText editTextName = (EditText) findViewById(R.id.editTextName);
+                editTextName.setError(null);
                 String name=editTextName.getText().toString();
+                if(TextUtils.isEmpty(name)){
+                    editTextName.setError(getString(R.string.empty_field));
+                    editTextName.requestFocus();
+                    return;
+                }
+                if(!name.matches("[a-zA-Z ]+")){
+                    editTextName.setError(getString(R.string.not_numeric_field));
+                    editTextName.requestFocus();
+                    return;
+                }
                 Intent intent =new Intent(getApplicationContext(), WelcomeActivity.class);
                 intent.putExtra("name",name);
                 intent.putExtra("type",typeOfFood);

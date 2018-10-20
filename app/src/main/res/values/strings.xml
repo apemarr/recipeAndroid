@@ -11,6 +11,8 @@
     <string name="empty_field">Campo obligatorio</string>
     <string name="numeric_field">Campo numerico</string>
     <string name="between_1_and_10">Numero entre 1 y 10</string>
+    <string name="not_numeric_field">No se admiten caracteres o numeros</string>
+
     <string name="title_activity_drawer">Drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
