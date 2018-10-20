@@ -25,6 +25,23 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.adrian.recipeandroid.MainActivity" />
         </activity>
+        <activity
+            android:name=".Drawer"
+            android:label="@string/title_activity_drawer"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.adrian.recipeandroid.WelcomeActivity" />
+        </activity>
+        <activity
+            android:name=".Recipes"
+            android:label="@string/title_activity_recipes"
+            android:parentActivityName=".Drawer"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.adrian.recipeandroid.Drawer" />
+        </activity>
     </application>
 
 </manifest>
