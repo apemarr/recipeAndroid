@@ -3,6 +3,7 @@ package com.example.adrian.recipeandroid.User;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
@@ -20,7 +21,8 @@ import android.view.ViewGroup;
 
 import com.example.adrian.recipeandroid.R;
 import com.example.adrian.recipeandroid.User.data.UserContract;
-import com.example.adrian.recipeandroid.constantes.G;
+import com.example.adrian.recipeandroid.UserDetailActivity;
+import com.example.adrian.recipeandroid.constants.G;
 
 
 public class userFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -46,6 +48,17 @@ public class userFragment extends Fragment implements LoaderManager.LoaderCallba
        menuItem.setIcon(R.drawable.ic_action_add);
        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case G.INSERTAR:
+                Intent intent=new Intent(getActivity(),UserDetailActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
