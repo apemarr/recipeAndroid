@@ -3,6 +3,7 @@
     package="com.example.adrian.recipeandroid">
 
     <application
+        android:name=".RecipeApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -36,6 +37,22 @@
         <activity
             android:name=".Recipes"
             android:label="@string/title_activity_recipes"
+            android:parentActivityName=".Drawer"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.adrian.recipeandroid.Drawer" />
+        </activity>
+
+        <provider
+            android:name=".provider.RecipeContentProvider"
+            android:authorities="com.example.adrian.recipeandroid.provider.RecipeContentProvider"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".UserActivity"
+            android:label="@string/title_activity_user"
             android:parentActivityName=".Drawer"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
