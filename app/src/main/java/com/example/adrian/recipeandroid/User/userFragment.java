@@ -12,6 +12,7 @@ import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,6 +28,7 @@ import com.example.adrian.recipeandroid.constants.G;
 
 public class userFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private userRecyclerViewAdapter mAdapter;
+    ActionMode mActionMode;
     public userFragment() {
     }
 
@@ -34,8 +36,31 @@ public class userFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(0,null,this);
+
+    }
+ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+    @Override
+    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        MenuInflater inflater=mode.getMenuInflater();
+        inflater.inflate(R.menu.contextual_menu,menu);
+        return false;
     }
 
+    @Override
+    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        return false;
+    }
+
+    @Override
+    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        return false;
+    }
+
+    @Override
+    public void onDestroyActionMode(ActionMode mode) {
+        mActionMode=null;
+    }
+};
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
