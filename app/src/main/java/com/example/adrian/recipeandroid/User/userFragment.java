@@ -12,6 +12,7 @@ import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,13 +38,15 @@ public class userFragment extends Fragment implements LoaderManager.LoaderCallba
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(0,null,this);
 
+
+
     }
 ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
     @Override
     public boolean onCreateActionMode(ActionMode mode, Menu menu) {
         MenuInflater inflater=mode.getMenuInflater();
         inflater.inflate(R.menu.contextual_menu,menu);
-        return false;
+        return true;
     }
 
     @Override
@@ -89,14 +92,25 @@ ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_user_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
-           mAdapter=new userRecyclerViewAdapter();
+           mAdapter=new userRecyclerViewAdapter(new userRecyclerViewAdapter.OnItemLongClick() {
+               @Override
+               public boolean onItemLongClick() {
+                   Log.i("tiburcio", "long click en el fragmento");
+                   if(mActionMode!=null){
+                       return false;
+                   }
+                   mActionMode=getActivity().startActionMode(mActionModeCallback);
+                   view.setSelected(true);
+                   return true;
+               }
+           });
             recyclerView.setAdapter(mAdapter);
         }
         return view;

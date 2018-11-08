@@ -2,9 +2,11 @@ package com.example.adrian.recipeandroid.User;
 
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,16 +16,30 @@ import com.example.adrian.recipeandroid.R;
 import com.example.adrian.recipeandroid.User.data.UserContract;
 
 
-public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerViewAdapter.ViewHolder> {
+public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerViewAdapter.ViewHolder>
+    implements View.OnLongClickListener {
 
    Cursor cursor;
+    OnItemLongClick listener;
+
 
     public void setCursor(Cursor cursor) {
         this.cursor = cursor;
     }
 
-    public userRecyclerViewAdapter() {
+    @Override
+    public boolean onLongClick(View v) {
+        Log.i("tiburcio", "long click");
+        listener.onItemLongClick();
+        return true;
+    }
 
+    public interface OnItemLongClick{
+        boolean onItemLongClick();
+    }
+
+    public userRecyclerViewAdapter(OnItemLongClick listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -45,6 +61,8 @@ public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerVi
                 name.substring(0,1),
                 generator.getColor(name));
         holder.miImageView.setImageDrawable(drawable);
+
+        holder.mView.setOnLongClickListener(this);
     }
 
     @Override
@@ -65,6 +83,7 @@ public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerVi
             mName = view.findViewById(R.id.textViewUsername);
             mEmail = view.findViewById(R.id.textViewEmail);
             miImageView=view.findViewById(R.id.imageView5);
+
         }
 
     }
