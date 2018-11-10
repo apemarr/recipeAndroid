@@ -25,11 +25,13 @@ import com.example.adrian.recipeandroid.R;
 import com.example.adrian.recipeandroid.User.data.UserContract;
 import com.example.adrian.recipeandroid.UserDetailActivity;
 import com.example.adrian.recipeandroid.constants.G;
+import com.example.adrian.recipeandroid.provider.UserProvider;
 
 
 public class userFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private userRecyclerViewAdapter mAdapter;
     ActionMode mActionMode;
+    View viewSeleccionado;
     public userFragment() {
     }
 
@@ -37,7 +39,6 @@ public class userFragment extends Fragment implements LoaderManager.LoaderCallba
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         getLoaderManager().initLoader(0,null,this);
-
 
 
     }
@@ -56,6 +57,14 @@ ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
     @Override
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_delete:
+                int userid=(Integer) viewSeleccionado.getTag();
+                UserProvider.delete(getActivity().getContentResolver(),userid);
+                break;
+            case R.id.menu_edit:
+                break;
+        }
         return false;
     }
 
@@ -108,6 +117,7 @@ ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
                    }
                    mActionMode=getActivity().startActionMode(mActionModeCallback);
                    view.setSelected(true);
+                   viewSeleccionado=view;
                    return true;
                }
            });

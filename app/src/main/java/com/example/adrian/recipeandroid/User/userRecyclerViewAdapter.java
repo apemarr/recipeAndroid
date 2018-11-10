@@ -53,6 +53,7 @@ public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerVi
     public void onBindViewHolder(final ViewHolder holder, int position) {
         cursor.moveToPosition(position);
         String name=cursor.getString(cursor.getColumnIndex(UserContract.NAME));
+        int ID =cursor.getInt(cursor.getColumnIndex(UserContract._ID));
         holder.mName.setText(name);
         holder.mEmail.setText(cursor.getString(cursor.getColumnIndex(UserContract.EMAIL)));
 
@@ -61,7 +62,7 @@ public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerVi
                 name.substring(0,1),
                 generator.getColor(name));
         holder.miImageView.setImageDrawable(drawable);
-
+        holder.mView.setTag(ID);
         holder.mView.setOnLongClickListener(this);
     }
 
@@ -76,6 +77,7 @@ public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerVi
         public final TextView mName;
         public final TextView mEmail;
         public final ImageView miImageView;
+        public final String mID;
 
         public ViewHolder(View view) {
             super(view);
@@ -83,7 +85,7 @@ public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerVi
             mName = view.findViewById(R.id.textViewUsername);
             mEmail = view.findViewById(R.id.textViewEmail);
             miImageView=view.findViewById(R.id.imageView5);
-
+            mID = UserContract._ID;
         }
 
     }

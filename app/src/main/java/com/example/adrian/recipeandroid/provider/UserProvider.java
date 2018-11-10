@@ -17,4 +17,8 @@ public class UserProvider {
 
         resolver.insert(uri, values);
     }
+    public static void delete(ContentResolver resolver,int userid){
+        Uri uri=Uri.parse(UserContract.CONTENT_URI+"/"+userid);
+        resolver.delete(uri, null, null);
+    }
 }
