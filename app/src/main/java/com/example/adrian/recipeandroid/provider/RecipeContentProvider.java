@@ -103,6 +103,7 @@ public class RecipeContentProvider extends ContentProvider {
               break;
           case ONE_REG:
               qb.setTables(UserContract.TABLE_NAME);
+              selection = UserContract._ID + " = " + uri.getLastPathSegment();
               break;
       }
       Cursor c=qb.query(db,projection,selection,selectionArgs,null,null,sortOrder);

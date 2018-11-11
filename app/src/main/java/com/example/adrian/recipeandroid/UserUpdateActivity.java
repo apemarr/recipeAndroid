@@ -14,7 +14,7 @@ import com.example.adrian.recipeandroid.pojos.User;
 import com.example.adrian.recipeandroid.provider.UserProvider;
 
 public class UserUpdateActivity extends AppCompatActivity {
-
+    int userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +22,7 @@ public class UserUpdateActivity extends AppCompatActivity {
         EditText editTextUsername=findViewById(R.id.editTextUsername);
         EditText editTextEmail=findViewById(R.id.editTextEmail);
 
-        int userId=this.getIntent().getExtras().getInt(UserContract._ID);
+        userId=this.getIntent().getExtras().getInt(UserContract._ID);
         User user=UserProvider.readRecord(getContentResolver(),userId);
         Log.i("Username------->",user.getName());
         Log.i("Useremail------->",user.getEmail());
@@ -69,8 +69,8 @@ public class UserUpdateActivity extends AppCompatActivity {
             editTextEmail.requestFocus();
             return;
         }
-        User user=new User(G.SIN_VALOR,username,email);
-        UserProvider.insert(getContentResolver(),user);
+        User user=new User(userId,username,email);
+        UserProvider.update(getContentResolver(),user);
         finish();
     }
 }
