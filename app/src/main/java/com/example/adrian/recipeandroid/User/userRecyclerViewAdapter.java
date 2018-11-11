@@ -30,12 +30,12 @@ public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerVi
     @Override
     public boolean onLongClick(View v) {
         Log.i("tiburcio", "long click");
-        listener.onItemLongClick();
+        listener.onItemLongClick(v);
         return true;
     }
 
     public interface OnItemLongClick{
-        boolean onItemLongClick();
+        boolean onItemLongClick(View v);
     }
 
     public userRecyclerViewAdapter(OnItemLongClick listener) {

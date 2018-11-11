@@ -59,7 +59,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.adrian.recipeandroid.Drawer" />
         </activity>
-        <activity android:name=".UserDetailActivity"
+        <activity android:name=".UserInsertActivity"
+            android:label="@string/title_activity_detail_user"
+            android:parentActivityName=".UserActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.adrian.recipeandroid.UserActivity" />
+        </activity>
+
+        <activity android:name=".UserUpdateActivity"
             android:label="@string/title_activity_detail_user"
             android:parentActivityName=".UserActivity">
             <meta-data

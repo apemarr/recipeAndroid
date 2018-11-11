@@ -23,7 +23,8 @@ import android.view.ViewGroup;
 
 import com.example.adrian.recipeandroid.R;
 import com.example.adrian.recipeandroid.User.data.UserContract;
-import com.example.adrian.recipeandroid.UserDetailActivity;
+import com.example.adrian.recipeandroid.UserInsertActivity;
+import com.example.adrian.recipeandroid.UserUpdateActivity;
 import com.example.adrian.recipeandroid.constants.G;
 import com.example.adrian.recipeandroid.provider.UserProvider;
 
@@ -32,6 +33,7 @@ public class userFragment extends Fragment implements LoaderManager.LoaderCallba
     private userRecyclerViewAdapter mAdapter;
     ActionMode mActionMode;
     View viewSeleccionado;
+    int userId;
     public userFragment() {
     }
 
@@ -59,10 +61,14 @@ ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_delete:
-                int userid=(Integer) viewSeleccionado.getTag();
-                UserProvider.delete(getActivity().getContentResolver(),userid);
+                UserProvider.delete(getActivity().getContentResolver(),userId);
+                mActionMode.finish();
                 break;
             case R.id.menu_edit:
+                Intent intent=new Intent(getActivity(),UserUpdateActivity.class);
+                intent.putExtra(UserContract._ID,userId);
+                Log.i("ID usuario--->",String.valueOf(userId));
+                startActivity(intent);
                 break;
         }
         return false;
@@ -91,7 +97,7 @@ ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case G.INSERTAR:
-                Intent intent=new Intent(getActivity(),UserDetailActivity.class);
+                Intent intent=new Intent(getActivity(),UserInsertActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -110,8 +116,9 @@ ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
            mAdapter=new userRecyclerViewAdapter(new userRecyclerViewAdapter.OnItemLongClick() {
                @Override
-               public boolean onItemLongClick() {
+               public boolean onItemLongClick(View v) {
                    Log.i("tiburcio", "long click en el fragmento");
+                   userId=(int) v.getTag();
                    if(mActionMode!=null){
                        return false;
                    }
@@ -129,6 +136,7 @@ ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String projection []={
+                UserContract._ID,
                 UserContract.NAME,
                 UserContract.EMAIL
         };

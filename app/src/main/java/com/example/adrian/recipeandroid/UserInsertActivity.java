@@ -13,7 +13,7 @@ import com.example.adrian.recipeandroid.provider.UserProvider;
 
 import org.w3c.dom.Text;
 
-public class UserDetailActivity extends AppCompatActivity {
+public class UserInsertActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
