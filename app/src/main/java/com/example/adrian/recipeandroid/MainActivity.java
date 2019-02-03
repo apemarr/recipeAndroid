@@ -18,80 +18,32 @@ import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     Button botonOk;
-    String typeOfFood;
+    Button botonLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Button botonOk = (Button) findViewById(R.id.botonOk);
-        RadioGroup radioGroupType= (RadioGroup) findViewById(R.id.radioGroupType);
-
+        Button botonLoginSign=(Button) findViewById(R.id.botonLoginSign);
 
         botonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText editTextName = (EditText) findViewById(R.id.editTextName);
-                editTextName.setError(null);
-                String name=editTextName.getText().toString();
-                if(TextUtils.isEmpty(name)){
-                    editTextName.setError(getString(R.string.empty_field));
-                    editTextName.requestFocus();
-                    return;
-                }
-                if(!name.matches("[a-zA-Z ]+")){
-                    editTextName.setError(getString(R.string.not_numeric_field));
-                    editTextName.requestFocus();
-                    return;
-                }
-                Intent intent =new Intent(getApplicationContext(), WelcomeActivity.class);
-                intent.putExtra("name",name);
-                intent.putExtra("type",typeOfFood);
+                Intent intent =new Intent(getApplicationContext(), Drawer.class);
                 startActivity(intent);
             }
         });
 
-        radioGroupType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                switch (checkedId){
-                    case R.id.radioButtonDish:
-                        typeOfFood="Platos";
-                        break;
-                    case R.id.radioButtonDessert:
-                        typeOfFood="Postres";
-                        break;
-                }
-            }
-        });
-
-        CheckBox onePerson=(CheckBox) findViewById(R.id.checkBoxQuantity1);
-        CheckBox twoPerson=(CheckBox) findViewById(R.id.checkBoxQuantity2);
-        CheckBox treePerson=(CheckBox) findViewById(R.id.checkBoxQuantity3);
-
-        onePerson.setOnClickListener(new View.OnClickListener() {
+        botonLoginSign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Ha seleccionado recetas para una persona", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
+                startActivity(intent);
             }
         });
 
-        twoPerson.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Ha seleccionado recetas para dos personas", Toast.LENGTH_SHORT).show();
 
-            }
-        });
-
-        treePerson.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Ha seleccionado recetas para tres o mas personas", Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
     }
     @Override

@@ -1,5 +1,6 @@
 package com.example.adrian.recipeandroid.User;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +15,9 @@ import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.example.adrian.recipeandroid.R;
 import com.example.adrian.recipeandroid.User.data.UserContract;
+import com.example.adrian.recipeandroid.constants.Utilidades;
+
+import java.io.IOException;
 
 
 public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerViewAdapter.ViewHolder>
@@ -57,11 +61,17 @@ public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerVi
         holder.mName.setText(name);
         holder.mEmail.setText(cursor.getString(cursor.getColumnIndex(UserContract.EMAIL)));
 
+
+    try{
+        Utilidades.loadImageFromStorage(holder.mContext,"img_"+ID+".jpg",holder.miImageView);
+    }catch(IOException e){
+
         ColorGenerator generator=ColorGenerator.MATERIAL;
         TextDrawable drawable=TextDrawable.builder().buildRound(
                 name.substring(0,1),
                 generator.getColor(name));
         holder.miImageView.setImageDrawable(drawable);
+    }
         holder.mView.setTag(ID);
         holder.mView.setOnLongClickListener(this);
     }
@@ -78,6 +88,7 @@ public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerVi
         public final TextView mEmail;
         public final ImageView miImageView;
         public final String mID;
+        public final Context mContext;
 
         public ViewHolder(View view) {
             super(view);
@@ -86,6 +97,7 @@ public class userRecyclerViewAdapter extends RecyclerView.Adapter<userRecyclerVi
             mEmail = view.findViewById(R.id.textViewEmail);
             miImageView=view.findViewById(R.id.imageView5);
             mID = UserContract._ID;
+            mContext=view.getContext();
         }
 
     }

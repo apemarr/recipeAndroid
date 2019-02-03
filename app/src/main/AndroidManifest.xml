@@ -10,6 +10,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SignInActivity"></activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="LoginActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.adrian.recipeandroid.MainActivity" />
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -59,15 +69,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.adrian.recipeandroid.Drawer" />
         </activity>
-        <activity android:name=".UserInsertActivity"
+        <activity
+            android:name=".UserInsertActivity"
             android:label="@string/title_activity_detail_user"
             android:parentActivityName=".UserActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.adrian.recipeandroid.UserActivity" />
         </activity>
-
-        <activity android:name=".UserUpdateActivity"
+        <activity
+            android:name=".UserUpdateActivity"
             android:label="@string/title_activity_detail_user"
             android:parentActivityName=".UserActivity">
             <meta-data
