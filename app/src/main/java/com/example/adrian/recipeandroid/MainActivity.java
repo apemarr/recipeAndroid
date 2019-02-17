@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.menu_help:
                 Toast.makeText(getApplicationContext(),"Ha pulsado la ayuda",Toast.LENGTH_SHORT).show();
+
         }
         return super.onOptionsItemSelected(item);
     }

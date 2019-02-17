@@ -28,6 +28,15 @@ Button buttonRegistrarse;
                 startActivity(intent);
             }
         });
+
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                intent.putExtra("usuario","usuario");
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
